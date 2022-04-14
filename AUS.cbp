@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="AUS" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/AUS" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-pedantic" />
+					<Add option="-Wextra" />
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/AUS" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="main.cpp" />
+		<Unit filename="structures/_logger/logger.cpp" />
+		<Unit filename="structures/_logger/logger.h" />
+		<Unit filename="structures/array/array.h" />
+		<Unit filename="structures/data_item.h" />
+		<Unit filename="structures/list/array_list.h" />
+		<Unit filename="structures/list/double_linked_list.h">
+			<Option compile="1" />
+		</Unit>
+		<Unit filename="structures/list/linked_list.h" />
+		<Unit filename="structures/list/list.h" />
+		<Unit filename="structures/matrix/coherent_matrix.h" />
+		<Unit filename="structures/matrix/incoherent_matrix.h" />
+		<Unit filename="structures/matrix/matrix.h" />
+		<Unit filename="structures/priority_queue/heap.h" />
+		<Unit filename="structures/priority_queue/priority_queue.h" />
+		<Unit filename="structures/priority_queue/priority_queue_limited_sorted_array_list.h" />
+		<Unit filename="structures/priority_queue/priority_queue_linked_list.h" />
+		<Unit filename="structures/priority_queue/priority_queue_list.h" />
+		<Unit filename="structures/priority_queue/priority_queue_sorted_array_list.h" />
+		<Unit filename="structures/priority_queue/priority_queue_two_lists.h" />
+		<Unit filename="structures/priority_queue/priority_queue_unsorted_array_list.h" />
+		<Unit filename="structures/queue/explicit_queue.h" />
+		<Unit filename="structures/queue/implicit_queue.h" />
+		<Unit filename="structures/queue/queue.h" />
+		<Unit filename="structures/stack/explicit_stack.h" />
+		<Unit filename="structures/stack/implicit_stack.h" />
+		<Unit filename="structures/stack/stack.h" />
+		<Unit filename="structures/structure.cpp" />
+		<Unit filename="structures/structure.h" />
+		<Unit filename="structures/structure_iterator.h" />
+		<Unit filename="structures/table/binary_search_tree.h" />
+		<Unit filename="structures/table/hash_table.h" />
+		<Unit filename="structures/table/linked_table.h" />
+		<Unit filename="structures/table/sequence_table.h" />
+		<Unit filename="structures/table/sorted_sequence_table.h" />
+		<Unit filename="structures/table/sorting/bubble_sort.h" />
+		<Unit filename="structures/table/sorting/heap_sort.h" />
+		<Unit filename="structures/table/sorting/insert_sort.h" />
+		<Unit filename="structures/table/sorting/merge_sort.h" />
+		<Unit filename="structures/table/sorting/quick_sort.h" />
+		<Unit filename="structures/table/sorting/radix_sort.h" />
+		<Unit filename="structures/table/sorting/select_sort.h" />
+		<Unit filename="structures/table/sorting/shell_sort.h" />
+		<Unit filename="structures/table/sorting/shuffle.h" />
+		<Unit filename="structures/table/sorting/sort.cpp" />
+		<Unit filename="structures/table/sorting/sort.h" />
+		<Unit filename="structures/table/table.h" />
+		<Unit filename="structures/table/treap.h" />
+		<Unit filename="structures/table/unsorted_sequence_table.h" />
+		<Unit filename="structures/tree/binary_tree.h" />
+		<Unit filename="structures/tree/k_way_tree.h" />
+		<Unit filename="structures/tree/multi_way_tree.h" />
+		<Unit filename="structures/tree/tree.h" />
+		<Unit filename="structures/types.h" />
+		<Unit filename="structures/utils.cpp" />
+		<Unit filename="structures/utils.h" />
+		<Unit filename="structures/vector/vector.cpp" />
+		<Unit filename="structures/vector/vector.h" />
+		<Unit filename="tests/array/array_test.cpp" />
+		<Unit filename="tests/array/array_test.h" />
+		<Unit filename="tests/list/list_test.cpp" />
+		<Unit filename="tests/list/list_test.h" />
+		<Unit filename="tests/matrix/matrix_test.cpp" />
+		<Unit filename="tests/matrix/matrix_test.h" />
+		<Unit filename="tests/priority_queue/priority_queue_test.cpp" />
+		<Unit filename="tests/priority_queue/priority_queue_test.h" />
+		<Unit filename="tests/queue/queue_test.cpp" />
+		<Unit filename="tests/queue/queue_test.h" />
+		<Unit filename="tests/stack/stack_test.cpp" />
+		<Unit filename="tests/stack/stack_test.h" />
+		<Unit filename="tests/stdvector/stdvector_test.cpp" />
+		<Unit filename="tests/stdvector/stdvector_test.h" />
+		<Unit filename="tests/table/table_test.cpp" />
+		<Unit filename="tests/table/table_test.h" />
+		<Unit filename="tests/test.cpp" />
+		<Unit filename="tests/test.h" />
+		<Unit filename="tests/tree/tree_test.cpp" />
+		<Unit filename="tests/tree/tree_test.h" />
+		<Unit filename="tests/vector/vector_test.cpp" />
+		<Unit filename="tests/vector/vector_test.h" />
+		<Unit filename="ui/console.cpp" />
+		<Unit filename="ui/console.h" />
+		<Unit filename="ui/ui_keeper.cpp" />
+		<Unit filename="ui/ui_keeper.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,368 @@
+# depslib dependency file v1.0
+1649509401 source:/home/roman/CodeBlocks_projects/AUS/main.cpp
+	"tests/vector/vector_test.h"
+	"tests/array/array_test.h"
+	"tests/matrix/matrix_test.h"
+	"tests/list/list_test.h"
+	"tests/stack/stack_test.h"
+	"tests/queue/queue_test.h"
+	"tests/priority_queue/priority_queue_test.h"
+	"tests/table/table_test.h"
+	"tests/tree/tree_test.h"
+	"ui/ui_keeper.h"
+	"ui/console.h"
+	<cstdio>
+
+1649089315 /home/roman/CodeBlocks_projects/AUS/tests/vector/vector_test.h
+	"../test.h"
+
+1646146448 /home/roman/CodeBlocks_projects/AUS/tests/test.h
+	"../structures/_logger/logger.h"
+	<chrono>
+	<string>
+	<vector>
+
+1648666168 /home/roman/CodeBlocks_projects/AUS/structures/_logger/logger.h
+	"../types.h"
+	<chrono>
+	<string>
+	<vector>
+
+1648754986 /home/roman/CodeBlocks_projects/AUS/structures/types.h
+	<chrono>
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/tests/array/array_test.h
+	"../test.h"
+
+1648900379 /home/roman/CodeBlocks_projects/AUS/tests/matrix/matrix_test.h
+	"../test.h"
+	"../../structures/matrix/matrix.h"
+	"../../structures/matrix/coherent_matrix.h"
+	"../../structures/_logger/logger.h"
+
+1647191531 /home/roman/CodeBlocks_projects/AUS/structures/matrix/matrix.h
+	"../structure.h"
+
+1646146446 /home/roman/CodeBlocks_projects/AUS/structures/structure.h
+	<stdexcept>
+
+1648665584 /home/roman/CodeBlocks_projects/AUS/structures/matrix/coherent_matrix.h
+	"matrix.h"
+	"../vector/vector.h"
+	"../list/list.h"
+	"../utils.h"
+	<stdexcept>
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/vector/vector.h
+	"../structure.h"
+	"../types.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/list/list.h
+	"../structure.h"
+	"../structure_iterator.h"
+
+1646146446 /home/roman/CodeBlocks_projects/AUS/structures/structure_iterator.h
+
+1646146446 /home/roman/CodeBlocks_projects/AUS/structures/utils.h
+	<string>
+
+1649957847 /home/roman/CodeBlocks_projects/AUS/tests/list/list_test.h
+	"../test.h"
+	"../../structures/list/array_list.h"
+	"../../structures/list/linked_list.h"
+	"../../structures/list/double_linked_list.h"
+
+1649959945 /home/roman/CodeBlocks_projects/AUS/structures/list/array_list.h
+	"list.h"
+	"../structure_iterator.h"
+	"../array/array.h"
+
+1647869058 /home/roman/CodeBlocks_projects/AUS/structures/array/array.h
+	"../structure.h"
+	"../vector/vector.h"
+	"../utils.h"
+	<stdexcept>
+
+1649877629 /home/roman/CodeBlocks_projects/AUS/structures/list/linked_list.h
+	"list.h"
+	"../structure_iterator.h"
+	"../data_item.h"
+	"../utils.h"
+
+1646146446 /home/roman/CodeBlocks_projects/AUS/structures/data_item.h
+
+1645211756 /home/roman/CodeBlocks_projects/AUS/tests/stack/stack_test.h
+	"../test.h"
+	"../../structures/stack/stack.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/stack/stack.h
+	"../structure.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/tests/queue/queue_test.h
+	"../test.h"
+	"../../structures/queue/queue.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/queue/queue.h
+	"../structure.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.h
+	"../test.h"
+	"../../structures/priority_queue/priority_queue.h"
+	"../../structures/priority_queue/priority_queue_list.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue.h
+	"../structure.h"
+	"../data_item.h"
+	<stdexcept>
+
+1649088191 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_list.h
+	"priority_queue.h"
+	"../list/list.h"
+	<stdexcept>
+	<climits>
+
+1645211756 /home/roman/CodeBlocks_projects/AUS/tests/table/table_test.h
+	"../test.h"
+	"../../structures/table/table.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/table/table.h
+	"../data_item.h"
+	"../structure.h"
+	"../structure_iterator.h"
+
+1645211756 /home/roman/CodeBlocks_projects/AUS/tests/tree/tree_test.h
+	"../test.h"
+	"../../structures/tree/tree.h"
+
+1649763240 /home/roman/CodeBlocks_projects/AUS/structures/tree/tree.h
+	"../structure.h"
+	"../structure_iterator.h"
+	"../data_item.h"
+	<queue>
+
+1649087542 /home/roman/CodeBlocks_projects/AUS/ui/ui_keeper.h
+	"../tests/test.h"
+	<vector>
+	<string>
+
+1646146448 /home/roman/CodeBlocks_projects/AUS/ui/console.h
+	<string>
+
+1648666253 source:/home/roman/CodeBlocks_projects/AUS/structures/_logger/logger.cpp
+	"logger.h"
+
+1649088003 source:/home/roman/CodeBlocks_projects/AUS/structures/structure.cpp
+	"structure.h"
+
+1645211754 source:/home/roman/CodeBlocks_projects/AUS/structures/table/sorting/sort.cpp
+	"sort.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/table/sorting/sort.h
+	"../unsorted_sequence_table.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/table/unsorted_sequence_table.h
+	"sequence_table.h"
+	"../list/array_list.h"
+	"../utils.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/table/sequence_table.h
+	"table.h"
+	"../list/list.h"
+	<stdexcept>
+
+1646146446 source:/home/roman/CodeBlocks_projects/AUS/structures/utils.cpp
+	"utils.h"
+	<stdexcept>
+
+1649960791 source:/home/roman/CodeBlocks_projects/AUS/structures/vector/vector.cpp
+	"vector.h"
+	"../utils.h"
+	<cstdlib>
+	<cstring>
+
+1645211754 source:/home/roman/CodeBlocks_projects/AUS/tests/array/array_test.cpp
+	"array_test.h"
+	"../../structures/array/array.h"
+
+1649959282 source:/home/roman/CodeBlocks_projects/AUS/tests/list/list_test.cpp
+	"list_test.h"
+
+1648978115 source:/home/roman/CodeBlocks_projects/AUS/tests/matrix/matrix_test.cpp
+	"matrix_test.h"
+	"../../structures/matrix/coherent_matrix.h"
+	"../../structures/matrix/incoherent_matrix.h"
+	<fstream>
+	<chrono>
+
+1647870784 /home/roman/CodeBlocks_projects/AUS/structures/matrix/incoherent_matrix.h
+	"matrix.h"
+	"../array/array.h"
+	<stdexcept>
+
+1645211754 source:/home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.cpp
+	"priority_queue_test.h"
+	"../../structures/priority_queue/heap.h"
+	"../../structures/priority_queue/priority_queue_limited_sorted_array_list.h"
+	"../../structures/priority_queue/priority_queue_linked_list.h"
+	"../../structures/priority_queue/priority_queue_sorted_array_list.h"
+	"../../structures/priority_queue/priority_queue_two_lists.h"
+	"../../structures/priority_queue/priority_queue_unsorted_array_list.h"
+
+1649087469 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/heap.h
+	"priority_queue_list.h"
+	"../list/array_list.h"
+	"../utils.h"
+	<stdexcept>
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_limited_sorted_array_list.h
+	"priority_queue_sorted_array_list.h"
+	<stdexcept>
+
+1649087194 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_sorted_array_list.h
+	"priority_queue_list.h"
+	"../list/array_list.h"
+	<stdexcept>
+
+1648556414 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_linked_list.h
+	"priority_queue_list.h"
+	"../list/linked_list.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_two_lists.h
+	"priority_queue.h"
+	"priority_queue_limited_sorted_array_list.h"
+	"../list/linked_list.h"
+	<cmath>
+
+1649087389 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_unsorted_array_list.h
+	"priority_queue_list.h"
+
+1645211754 source:/home/roman/CodeBlocks_projects/AUS/tests/queue/queue_test.cpp
+	"queue_test.h"
+	"../../structures/queue/implicit_queue.h"
+	"../../structures/queue/explicit_queue.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/queue/implicit_queue.h
+	"queue.h"
+	"../array/array.h"
+	<stdexcept>
+
+1647956304 /home/roman/CodeBlocks_projects/AUS/structures/queue/explicit_queue.h
+	"queue.h"
+	"../list/linked_list.h"
+
+1645211756 source:/home/roman/CodeBlocks_projects/AUS/tests/stack/stack_test.cpp
+	"stack_test.h"
+	"../../structures/stack/implicit_stack.h"
+	"../../structures/stack/explicit_stack.h"
+
+1647956181 /home/roman/CodeBlocks_projects/AUS/structures/stack/implicit_stack.h
+	"stack.h"
+	"../list/array_list.h"
+
+1647955669 /home/roman/CodeBlocks_projects/AUS/structures/stack/explicit_stack.h
+	"stack.h"
+	"../list/linked_list.h"
+
+1645211756 source:/home/roman/CodeBlocks_projects/AUS/tests/stdvector/stdvector_test.cpp
+	"stdvector_test.h"
+	"../../structures/_logger/logger.h"
+	<vector>
+
+1645211756 /home/roman/CodeBlocks_projects/AUS/tests/stdvector/stdvector_test.h
+	"../test.h"
+
+1649106706 source:/home/roman/CodeBlocks_projects/AUS/tests/test.cpp
+	"test.h"
+	"../structures/_logger/logger.h"
+	<chrono>
+	<exception>
+
+1649089968 source:/home/roman/CodeBlocks_projects/AUS/tests/vector/vector_test.cpp
+	"vector_test.h"
+	"../../structures/vector/vector.h"
+
+1646146448 source:/home/roman/CodeBlocks_projects/AUS/ui/console.cpp
+	"console.h"
+	<iostream>
+	<iomanip>
+	<Windows.h>
+
+1649106706 source:/home/roman/CodeBlocks_projects/AUS/ui/ui_keeper.cpp
+	"ui_keeper.h"
+	"console.h"
+	"../structures/_logger/logger.h"
+	<algorithm>
+	<cctype>
+	<exception>
+	<iostream>
+	<sstream>
+	<string>
+
+1645211756 source:/home/roman/CodeBlocks_projects/AUS/tests/tree/tree_test.cpp
+	"tree_test.h"
+	"../../structures/tree/binary_tree.h"
+	"../../structures/tree/k_way_tree.h"
+	"../../structures/tree/multi_way_tree.h"
+
+1649767317 /home/roman/CodeBlocks_projects/AUS/structures/tree/binary_tree.h
+	"k_way_tree.h"
+	"tree.h"
+	<queue>
+
+1649765441 /home/roman/CodeBlocks_projects/AUS/structures/tree/k_way_tree.h
+	"tree.h"
+	"../array/array.h"
+
+1649765551 /home/roman/CodeBlocks_projects/AUS/structures/tree/multi_way_tree.h
+	"tree.h"
+	"../list/list.h"
+	"../list/array_list.h"
+
+1645211756 source:/home/roman/CodeBlocks_projects/AUS/tests/table/table_test.cpp
+	"table_test.h"
+	"../../structures/table/binary_search_tree.h"
+	"../../structures/table/hash_table.h"
+	"../../structures/table/linked_table.h"
+	"../../structures/table/sorted_sequence_table.h"
+	"../../structures/table/table.h"
+	"../../structures/table/treap.h"
+	"../../structures/table/unsorted_sequence_table.h"
+
+1649107629 /home/roman/CodeBlocks_projects/AUS/structures/table/binary_search_tree.h
+	"table.h"
+	"../list/list.h"
+	"../tree/binary_tree.h"
+	<stdexcept>
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/table/hash_table.h
+	"table.h"
+	"linked_table.h"
+	"../array/array.h"
+	"../structure_iterator.h"
+	<stdexcept>
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/table/linked_table.h
+	"../list/linked_list.h"
+	"sequence_table.h"
+
+1645211754 /home/roman/CodeBlocks_projects/AUS/structures/table/sorted_sequence_table.h
+	"../list/array_list.h"
+	"sequence_table.h"
+
+1649148625 /home/roman/CodeBlocks_projects/AUS/structures/table/treap.h
+	"binary_search_tree.h"
+	<random>
+	<climits>
+
+1649879704 source:/home/roman/CodeBlocks_projects/AUS/structures/list/double_linked_list.h
+	"list.h"
+	"../structure_iterator.h"
+	"../data_item.h"
+	"../utils.h"
+
+1649879704 /home/roman/CodeBlocks_projects/AUS/structures/list/double_linked_list.h
+	"list.h"
+	"../structure_iterator.h"
+	"../data_item.h"
+	"../utils.h"
+
