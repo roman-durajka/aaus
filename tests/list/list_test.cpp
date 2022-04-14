@@ -1,4 +1,5 @@
 #include "list_test.h"
+#include "limits.h"
 
 namespace tests
 {
@@ -607,5 +608,104 @@ namespace tests
         assertTrue(arrayList->size() == 0);
 
         delete arrayList;
+    }
+
+//power test
+
+    ListPowerTest::ListPowerTest(std::string name) :
+        SimpleTest(std::move(name))
+    {
+    }
+
+    int ListPowerTest::getRandomNumber(int low, int high) {
+        return rand() % (high - low + 1) + low;
+    }
+
+    void ListPowerTest::test() {
+        srand(time(NULL));
+        structures::List<int>* newList = createList();
+
+        //main loop
+        int operationInsertCount = 0;
+        int operationRemoveAtCount = 0;
+        int operationAtCount = 0;
+        int operationGetIndexOfCount = 0;
+        for (int i = 0; i < iterationCount; i++) {
+            switch(getRandomNumber(1, 4)) {
+                case 1: {
+                    if (operationInsertCount >= getOperationInsertMaxCount()) {
+                        break;
+                    }
+                    operationInsertCount++;
+
+                    int randomValue = getRandomNumber(0, SHRT_MAX);
+                    int randomIndex = getRandomNumber(0, newList->size());
+
+                    SimpleTest::startStopwatch();
+                    newList->insert(randomValue, randomIndex);
+                    SimpleTest::stopStopwatch();
+                    break;
+                }
+                case 2: {
+                    if (operationRemoveAtCount >= getOperationRemoveAtMaxCount()) {
+                        break;
+                    }
+                    operationRemoveAtCount++;
+
+                    int randomIndex = getRandomNumber(0, newList->size());
+
+                    SimpleTest::startStopwatch();
+                    newList->removeAt(randomIndex);
+                    SimpleTest::stopStopwatch();
+                    break;
+                }
+                case 3: {
+                    if (operationAtCount >= getOperationAtMaxCount()) {
+                        break;
+                    }
+                    operationAtCount++;
+
+                    int randomIndex = getRandomNumber(0, newList->size());
+
+                    SimpleTest::startStopwatch();
+                    newList->at(randomIndex);
+                    SimpleTest::stopStopwatch();
+                    break;
+                }
+                case 4: {
+                    if (operationGetIndexOfCount >= getOperationGetIndexOfMaxCount()) {
+                        break;
+                    }
+                    operationGetIndexOfCount++;
+
+                    int randomIndex = getRandomNumber(0, newList->size());
+                    int randomValue = newList->at(randomIndex);
+
+                    SimpleTest::startStopwatch();
+                    newList->getIndexOf(randomValue);
+                    SimpleTest::stopStopwatch();
+                    break;
+                }
+            }
+        }
+        delete newList;
+    }
+
+    ArrayListPowerTest::ArrayListPowerTest(std::string name) :
+        ListPowerTest(std::move(name))
+    {
+    }
+
+    structures::List<int>* ArrayListPowerTest::createList() {
+        return new structures::ArrayList<int>();
+    }
+
+    DoubleLinkedListPowerTest::DoubleLinkedListPowerTest(std::string name) :
+        ListPowerTest(std::move(name))
+    {
+    }
+
+    structures::List<int>* DoubleLinkedListPowerTest::createList() {
+        return new structures::DoubleLinkedList<int>();
     }
 }

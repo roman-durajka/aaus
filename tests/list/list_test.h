@@ -262,4 +262,45 @@ namespace tests
             DoubleLinkedListTestClear();
             void test() override;
     };
+
+//power test
+
+    enum Operation
+    {
+      insert, removeAt, at,  getIndexOf
+    };
+
+    class ListPowerTest
+        : public SimpleTest
+    {
+        public:
+            ListPowerTest(std::string name);
+            virtual structures::List<int>* createList() = 0;
+            virtual bool getOperationInsertMaxCount() = 0;
+            virtual bool getOperationRemoveAtMaxCount() = 0;
+            virtual bool getOperationAtMaxCount() = 0;
+            virtual bool getOperationGetIndexOfMaxCount() = 0;
+            int getRandomNumber(int low, int high);
+            void test() override;
+        protected:
+            static const int iterationCount = 100000;
+    };
+
+    class ArrayListPowerTest
+        : public ListPowerTest
+    {
+        public:
+            ArrayListPowerTest(std::string name);
+            structures::List<int>* createList();
+    };
+
+    class DoubleLinkedListPowerTest
+        : public ListPowerTest
+    {
+        public:
+            DoubleLinkedListPowerTest(std::string name);
+            structures::List<int>* createList();
+    };
+
+    class
 }
