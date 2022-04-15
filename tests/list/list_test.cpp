@@ -1,6 +1,8 @@
 #include "list_test.h"
 #include "limits.h"
 
+#include <fstream>
+
 namespace tests
 {
 // ListTestInterface:
@@ -87,6 +89,10 @@ namespace tests
 		addTest(new ArrayListTestRemoveAt());
 		addTest(new ArrayListTestClear());
 		addTest(new ArrayListTestGetIndexOf());
+
+		addTest(new ArrayListPowerTestScenarioA());
+		addTest(new ArrayListPowerTestScenarioB());
+		addTest(new ArrayListPowerTestScenarioC());
 	}
 
 // LinkedListTestOverall:
@@ -114,6 +120,10 @@ namespace tests
 		addTest(new DoubleLinkedListTestRemoveAt());
 		addTest(new DoubleLinkedListTestGetIndexOf());
 		addTest(new DoubleLinkedListTestClear());
+
+		addTest(new DoubleLinkedListPowerTestScenarioA());
+		addTest(new DoubleLinkedListPowerTestScenarioB());
+		addTest(new DoubleLinkedListPowerTestScenarioC());
 	}
 
 // ListTestOverall:
@@ -618,23 +628,45 @@ namespace tests
     }
 
     int ListPowerTest::getRandomNumber(int low, int high) {
-        return rand() % (high - low + 1) + low;
+        return rand() % (high - low) + low;
     }
 
     void ListPowerTest::test() {
         srand(time(NULL));
         structures::List<int>* newList = createList();
 
+        Scenario* scenario;
+        char currentScenario = getCurrentScenario();
+        switch (currentScenario) {
+            case('A'):
+                scenario = new ScenarioA();
+                break;
+            case('B'):
+                scenario = new ScenarioB();
+                break;
+            case('C'):
+                scenario = new ScenarioC();
+                break;
+            default:
+                throw std::logic_error("Unknown error occured, what even happened?");
+        }
+
+        std::ofstream outputFile;
+        outputFile.open("analysis/power_analysis/" + getName() + "/" + currentScenario + ".csv");
+        outputFile << "operation;duration;index\n";
+
         //main loop
         int operationInsertCount = 0;
         int operationRemoveAtCount = 0;
         int operationAtCount = 0;
         int operationGetIndexOfCount = 0;
-        for (int i = 0; i < iterationCount; i++) {
-            switch(getRandomNumber(1, 4)) {
+
+        for (int i = 0; i < iterationCount_; i++) {
+            switch(getRandomNumber(1, 5)) {
                 case 1: {
-                    if (operationInsertCount >= getOperationInsertMaxCount()) {
-                        break;
+                    if (operationInsertCount >= scenario->getInsertCount()) {
+                        i--;
+                        continue;
                     }
                     operationInsertCount++;
 
@@ -644,11 +676,17 @@ namespace tests
                     SimpleTest::startStopwatch();
                     newList->insert(randomValue, randomIndex);
                     SimpleTest::stopStopwatch();
+
+                    outputFile << "insert;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
                     break;
                 }
                 case 2: {
-                    if (operationRemoveAtCount >= getOperationRemoveAtMaxCount()) {
-                        break;
+                    if (operationRemoveAtCount >= scenario->getRemoveAtCount()) {
+                        i--;
+                        continue;
                     }
                     operationRemoveAtCount++;
 
@@ -657,11 +695,17 @@ namespace tests
                     SimpleTest::startStopwatch();
                     newList->removeAt(randomIndex);
                     SimpleTest::stopStopwatch();
+
+                    outputFile << "removeAt;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
                     break;
                 }
                 case 3: {
-                    if (operationAtCount >= getOperationAtMaxCount()) {
-                        break;
+                    if (operationAtCount >= scenario->getAtCount()) {
+                        i--;
+                        continue;
                     }
                     operationAtCount++;
 
@@ -670,11 +714,17 @@ namespace tests
                     SimpleTest::startStopwatch();
                     newList->at(randomIndex);
                     SimpleTest::stopStopwatch();
+
+                    outputFile << "at;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
                     break;
                 }
                 case 4: {
-                    if (operationGetIndexOfCount >= getOperationGetIndexOfMaxCount()) {
-                        break;
+                    if (operationGetIndexOfCount >= scenario->getIndexOfCount()) {
+                        i--;
+                        continue;
                     }
                     operationGetIndexOfCount++;
 
@@ -684,10 +734,20 @@ namespace tests
                     SimpleTest::startStopwatch();
                     newList->getIndexOf(randomValue);
                     SimpleTest::stopStopwatch();
+
+                    outputFile << "getIndexOf;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
                     break;
                 }
             }
+            outputFile << std::to_string(i + 1);
+            outputFile << "\n";
         }
+        outputFile.close();
+
+        delete scenario;
         delete newList;
     }
 
@@ -697,7 +757,11 @@ namespace tests
     }
 
     structures::List<int>* ArrayListPowerTest::createList() {
-        return new structures::ArrayList<int>();
+        structures::ArrayList<int>* arrayList = new structures::ArrayList<int>();
+        for (int i = 0; i < iterationCount_; i++) {
+            arrayList->add(0);
+        }
+        return arrayList;
     }
 
     DoubleLinkedListPowerTest::DoubleLinkedListPowerTest(std::string name) :
@@ -706,6 +770,40 @@ namespace tests
     }
 
     structures::List<int>* DoubleLinkedListPowerTest::createList() {
-        return new structures::DoubleLinkedList<int>();
+        structures::DoubleLinkedList<int>* doubleLinkedList = new structures::DoubleLinkedList<int>();
+        for (int i = 0; i < iterationCount_; i++) {
+            doubleLinkedList->add(0);
+        }
+        return doubleLinkedList;
+    }
+
+    ArrayListPowerTestScenarioA::ArrayListPowerTestScenarioA() :
+        ArrayListPowerTest("ArrayList power test scenario A")
+    {
+    }
+
+    ArrayListPowerTestScenarioB::ArrayListPowerTestScenarioB() :
+        ArrayListPowerTest("ArrayList power test scenario B")
+    {
+    }
+
+    ArrayListPowerTestScenarioC::ArrayListPowerTestScenarioC() :
+        ArrayListPowerTest("ArrayList power test scenario C")
+    {
+    }
+
+    DoubleLinkedListPowerTestScenarioA::DoubleLinkedListPowerTestScenarioA() :
+        DoubleLinkedListPowerTest("DoubleLinkedList power test scenario A")
+    {
+    }
+
+    DoubleLinkedListPowerTestScenarioB::DoubleLinkedListPowerTestScenarioB() :
+        DoubleLinkedListPowerTest("DoubleLinkedList power test scenario B")
+    {
+    }
+
+    DoubleLinkedListPowerTestScenarioC::DoubleLinkedListPowerTestScenarioC() :
+        DoubleLinkedListPowerTest("DoubleLinkedList power test scenario C")
+    {
     }
 }

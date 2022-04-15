@@ -265,6 +265,8 @@ namespace tests
 
 //power test
 
+
+
     enum Operation
     {
       insert, removeAt, at,  getIndexOf
@@ -276,14 +278,50 @@ namespace tests
         public:
             ListPowerTest(std::string name);
             virtual structures::List<int>* createList() = 0;
-            virtual bool getOperationInsertMaxCount() = 0;
-            virtual bool getOperationRemoveAtMaxCount() = 0;
-            virtual bool getOperationAtMaxCount() = 0;
-            virtual bool getOperationGetIndexOfMaxCount() = 0;
+            virtual char getCurrentScenario() = 0;
+            virtual std::string getName() = 0;
             int getRandomNumber(int low, int high);
             void test() override;
         protected:
-            static const int iterationCount = 100000;
+            static const int iterationCount_ = 100000;
+
+        class Scenario
+        {
+            private:
+                int insertCount_ = iterationCount_ / 100;
+                int removeAtCount_ = iterationCount_ / 100;
+                int atCount_ = iterationCount_ / 100;
+                int indexOfCount_ = iterationCount_ / 100;
+
+            public:
+                Scenario(int insertCount, int removeAtCount, int atCount, int indexOfCount)
+                {
+                    insertCount_ *= insertCount;
+                    removeAtCount_ *= removeAtCount;
+                    atCount_ *= atCount;
+                    indexOfCount_ *= indexOfCount;
+                };
+
+                inline int getInsertCount() { return insertCount_; }
+                inline int getRemoveAtCount() { return removeAtCount_ ;}
+                inline int getAtCount() { return atCount_; }
+                inline int getIndexOfCount() { return indexOfCount_; }
+        };
+
+        class ScenarioA : public Scenario {
+            public:
+                ScenarioA() : Scenario(20, 20, 50, 10) {};
+        };
+
+        class ScenarioB : public Scenario {
+            public:
+                ScenarioB() : Scenario(35, 35, 20, 10) {};
+        };
+
+        class ScenarioC : public Scenario {
+            public:
+                ScenarioC() : Scenario(45, 45, 5, 5) {};
+        };
     };
 
     class ArrayListPowerTest
@@ -291,7 +329,8 @@ namespace tests
     {
         public:
             ArrayListPowerTest(std::string name);
-            structures::List<int>* createList();
+            structures::List<int>* createList() override;
+            std::string getName() override { return "ArrayList"; }
     };
 
     class DoubleLinkedListPowerTest
@@ -299,8 +338,61 @@ namespace tests
     {
         public:
             DoubleLinkedListPowerTest(std::string name);
-            structures::List<int>* createList();
+            structures::List<int>* createList() override;
+            std::string getName() override { return "DoubleLinkedList"; }
     };
 
-    class
+    class ArrayListPowerTestScenarioA
+        : public ArrayListPowerTest {
+        private:
+            char scenario = 'A';
+        public:
+            ArrayListPowerTestScenarioA();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class ArrayListPowerTestScenarioB
+        : public ArrayListPowerTest {
+        private:
+            char scenario = 'B';
+        public:
+        ArrayListPowerTestScenarioB();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class ArrayListPowerTestScenarioC
+        : public ArrayListPowerTest {
+        private:
+            char scenario = 'C';
+        public:
+            ArrayListPowerTestScenarioC();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class DoubleLinkedListPowerTestScenarioA
+        : public DoubleLinkedListPowerTest {
+        private:
+            char scenario = 'A';
+        public:
+            DoubleLinkedListPowerTestScenarioA();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class DoubleLinkedListPowerTestScenarioB
+        : public DoubleLinkedListPowerTest {
+        private:
+            char scenario = 'B';
+        public:
+            DoubleLinkedListPowerTestScenarioB();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class DoubleLinkedListPowerTestScenarioC
+        : public DoubleLinkedListPowerTest {
+        private:
+            char scenario = 'C';
+        public:
+            DoubleLinkedListPowerTestScenarioC();
+            char getCurrentScenario() override { return scenario; }
+    };
 }
