@@ -395,4 +395,94 @@ namespace tests
             DoubleLinkedListPowerTestScenarioC();
             char getCurrentScenario() override { return scenario; }
     };
+
+    class TimeAnalysis
+        : public SimpleTest {
+        public:
+            TimeAnalysis(std::string name);
+            virtual structures::List<int>* createList(int size) = 0;
+            virtual std::string getCurrentOperation() = 0;
+            virtual std::string getName() = 0;
+            int getRandomNumber(int low, int high);
+            void test() override;
+        protected:
+            static const int iterationCount_ = 10000;
+            static const int repeatCount_ = 100;
+    };
+
+    class ArrayListTimeAnalysis
+        : public TimeAnalysis
+    {
+        public:
+            ArrayListTimeAnalysis(std::string name);
+            structures::List<int>* createList(int size) override;
+            std::string getName() override { return "ArrayList"; }
+    };
+
+    class DoubleLinkedListTimeAnalysis
+        : public TimeAnalysis
+    {
+        public:
+            DoubleLinkedListTimeAnalysis(std::string name);
+            structures::List<int>* createList(int size) override;
+            std::string getName() override { return "DoubleLinkedList"; }
+    };
+
+//array list operations
+
+    class ArrayListTimeAnalysisInsert
+        : public ArrayListTimeAnalysis {
+        private:
+            std::string operation_ = "insert";
+        public:
+            ArrayListTimeAnalysisInsert();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class ArrayListTimeAnalysisAt
+        : public ArrayListTimeAnalysis {
+        private:
+            std::string operation_ = "at";
+        public:
+            ArrayListTimeAnalysisAt();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class ArrayListTimeAnalysisRemoveAt
+        : public ArrayListTimeAnalysis {
+        private:
+            std::string operation_ = "removeAt";
+        public:
+            ArrayListTimeAnalysisRemoveAt();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+//double linked list operations
+
+class DoubleLinkedListTimeAnalysisInsert
+        : public DoubleLinkedListTimeAnalysis {
+        private:
+            std::string operation_ = "insert";
+        public:
+            DoubleLinkedListTimeAnalysisInsert();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class DoubleLinkedListTimeAnalysisAt
+        : public DoubleLinkedListTimeAnalysis {
+        private:
+            std::string operation_ = "at";
+        public:
+            DoubleLinkedListTimeAnalysisAt();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class DoubleLinkedListTimeAnalysisRemoveAt
+        : public DoubleLinkedListTimeAnalysis {
+        private:
+            std::string operation_ = "removeAt";
+        public:
+            DoubleLinkedListTimeAnalysisRemoveAt();
+            std::string getCurrentOperation() override { return operation_; }
+    };
 }

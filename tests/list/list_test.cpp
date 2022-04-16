@@ -90,9 +90,15 @@ namespace tests
 		addTest(new ArrayListTestClear());
 		addTest(new ArrayListTestGetIndexOf());
 
+        //power test
 		addTest(new ArrayListPowerTestScenarioA());
 		addTest(new ArrayListPowerTestScenarioB());
 		addTest(new ArrayListPowerTestScenarioC());
+
+		//time analysis
+		addTest(new ArrayListTimeAnalysisInsert());
+		addTest(new ArrayListTimeAnalysisAt());
+		addTest(new ArrayListTimeAnalysisRemoveAt());
 	}
 
 // LinkedListTestOverall:
@@ -121,9 +127,15 @@ namespace tests
 		addTest(new DoubleLinkedListTestGetIndexOf());
 		addTest(new DoubleLinkedListTestClear());
 
+        //power test
 		addTest(new DoubleLinkedListPowerTestScenarioA());
 		addTest(new DoubleLinkedListPowerTestScenarioB());
 		addTest(new DoubleLinkedListPowerTestScenarioC());
+
+		//time analysis
+		addTest(new DoubleLinkedListTimeAnalysisInsert());
+		addTest(new DoubleLinkedListTimeAnalysisAt());
+		addTest(new DoubleLinkedListTimeAnalysisRemoveAt());
 	}
 
 // ListTestOverall:
@@ -759,7 +771,7 @@ namespace tests
     structures::List<int>* ArrayListPowerTest::createList() {
         structures::ArrayList<int>* arrayList = new structures::ArrayList<int>();
         for (int i = 0; i < iterationCount_; i++) {
-            arrayList->add(0);
+            arrayList->add(getRandomNumber(0, SHRT_MAX));
         }
         return arrayList;
     }
@@ -772,7 +784,7 @@ namespace tests
     structures::List<int>* DoubleLinkedListPowerTest::createList() {
         structures::DoubleLinkedList<int>* doubleLinkedList = new structures::DoubleLinkedList<int>();
         for (int i = 0; i < iterationCount_; i++) {
-            doubleLinkedList->add(0);
+            doubleLinkedList->add(getRandomNumber(0, SHRT_MAX));
         }
         return doubleLinkedList;
     }
@@ -804,6 +816,130 @@ namespace tests
 
     DoubleLinkedListPowerTestScenarioC::DoubleLinkedListPowerTestScenarioC() :
         DoubleLinkedListPowerTest("DoubleLinkedList power test scenario C")
+    {
+    }
+
+//time analyis
+
+TimeAnalysis::TimeAnalysis(std::string name) :
+        SimpleTest(std::move(name))
+    {
+    }
+
+    int TimeAnalysis::getRandomNumber(int low, int high) {
+        return rand() % (high - low) + low;
+    }
+
+    void TimeAnalysis::test() {
+        srand(time(NULL));
+        std::string currentOperation = getCurrentOperation();
+
+        std::ofstream outputFile;
+        outputFile.open("analysis/time_analysis/" + getName() + "/" + currentOperation + ".csv");
+        outputFile << "operation;duration;index\n";
+
+        int randomIndex;
+
+        //main loop
+        for (int i = 10; i < iterationCount_; i += 100) {
+            structures::List<int>* newList = createList(i);
+
+            for (int y = 0; y < repeatCount_; y++) {
+                randomIndex = getRandomNumber(0, newList->size());
+
+                if (currentOperation == "insert") {
+                    SimpleTest::startStopwatch();
+                    newList->insert(0, randomIndex);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "insert;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+                }
+                else if (currentOperation == "removeAt") {
+                    SimpleTest::startStopwatch();
+                    newList->removeAt(randomIndex);
+                    SimpleTest::stopStopwatch();
+                    newList->add(0);
+
+                    outputFile << "removeAt;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+                }
+                else if (currentOperation == "at") {
+                    SimpleTest::startStopwatch();
+                    newList->at(randomIndex);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "at;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+                }
+                outputFile << std::to_string(i + 1);
+                outputFile << "\n";
+            }
+            delete newList;
+        }
+        outputFile.close();
+    }
+
+//array list time analysis
+
+    ArrayListTimeAnalysis::ArrayListTimeAnalysis(std::string name) :
+        TimeAnalysis(std::move(name))
+    {
+    }
+
+    structures::List<int>* ArrayListTimeAnalysis::createList(int size) {
+        structures::ArrayList<int>* arrayList = new structures::ArrayList<int>();
+        for (int i = 0; i < size; i++) {
+            arrayList->add(0);
+        }
+        return arrayList;
+    }
+
+    DoubleLinkedListTimeAnalysis::DoubleLinkedListTimeAnalysis(std::string name) :
+        TimeAnalysis(std::move(name))
+    {
+    }
+
+    structures::List<int>* DoubleLinkedListTimeAnalysis::createList(int size) {
+        structures::DoubleLinkedList<int>* doubleLinkedList = new structures::DoubleLinkedList<int>();
+        for (int i = 0; i < size; i++) {
+            doubleLinkedList->add(0);
+        }
+        return doubleLinkedList;
+    }
+
+//operations
+
+    ArrayListTimeAnalysisInsert::ArrayListTimeAnalysisInsert() :
+            ArrayListTimeAnalysis("ArrayList time analysis insert")
+    {
+    }
+
+    ArrayListTimeAnalysisAt::ArrayListTimeAnalysisAt() :
+            ArrayListTimeAnalysis("ArrayList time analysis at")
+    {
+    }
+
+    ArrayListTimeAnalysisRemoveAt::ArrayListTimeAnalysisRemoveAt() :
+            ArrayListTimeAnalysis("ArrayList time analysis remove at")
+    {
+    }
+
+    DoubleLinkedListTimeAnalysisInsert::DoubleLinkedListTimeAnalysisInsert() :
+            DoubleLinkedListTimeAnalysis("DoubleLinkedList time analysis insert")
+    {
+    }
+
+    DoubleLinkedListTimeAnalysisAt::DoubleLinkedListTimeAnalysisAt() :
+            DoubleLinkedListTimeAnalysis("DoubleLinkedList time analysis at")
+    {
+    }
+
+    DoubleLinkedListTimeAnalysisRemoveAt::DoubleLinkedListTimeAnalysisRemoveAt() :
+            DoubleLinkedListTimeAnalysis("DoubleLinkedList time analysis remove at")
     {
     }
 }

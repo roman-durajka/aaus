@@ -66,7 +66,7 @@
 1646146446 /home/roman/CodeBlocks_projects/AUS/structures/utils.h
 	<string>
 
-1650028042 /home/roman/CodeBlocks_projects/AUS/tests/list/list_test.h
+1650117745 /home/roman/CodeBlocks_projects/AUS/tests/list/list_test.h
 	"../test.h"
 	"../../structures/list/array_list.h"
 	"../../structures/list/linked_list.h"
@@ -184,7 +184,7 @@
 	"array_test.h"
 	"../../structures/array/array.h"
 
-1650028328 source:/home/roman/CodeBlocks_projects/AUS/tests/list/list_test.cpp
+1650117294 source:/home/roman/CodeBlocks_projects/AUS/tests/list/list_test.cpp
 	"list_test.h"
 	"limits.h"
 	<fstream>
