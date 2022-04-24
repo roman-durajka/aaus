@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1649509401 source:/home/roman/CodeBlocks_projects/AUS/main.cpp
+1650806806 source:/home/roman/CodeBlocks_projects/AUS/main.cpp
 	"tests/vector/vector_test.h"
 	"tests/array/array_test.h"
 	"tests/matrix/matrix_test.h"
@@ -105,7 +105,7 @@
 1645211754 /home/roman/CodeBlocks_projects/AUS/structures/queue/queue.h
 	"../structure.h"
 
-1645211754 /home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.h
+1650808818 /home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.h
 	"../test.h"
 	"../../structures/priority_queue/priority_queue.h"
 	"../../structures/priority_queue/priority_queue_list.h"
@@ -184,7 +184,7 @@
 	"array_test.h"
 	"../../structures/array/array.h"
 
-1650117294 source:/home/roman/CodeBlocks_projects/AUS/tests/list/list_test.cpp
+1650117830 source:/home/roman/CodeBlocks_projects/AUS/tests/list/list_test.cpp
 	"list_test.h"
 	"limits.h"
 	<fstream>
@@ -201,7 +201,7 @@
 	"../array/array.h"
 	<stdexcept>
 
-1645211754 source:/home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.cpp
+1650813022 source:/home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.cpp
 	"priority_queue_test.h"
 	"../../structures/priority_queue/heap.h"
 	"../../structures/priority_queue/priority_queue_limited_sorted_array_list.h"
@@ -210,17 +210,17 @@
 	"../../structures/priority_queue/priority_queue_two_lists.h"
 	"../../structures/priority_queue/priority_queue_unsorted_array_list.h"
 
-1649087469 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/heap.h
+1650807480 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/heap.h
 	"priority_queue_list.h"
 	"../list/array_list.h"
 	"../utils.h"
 	<stdexcept>
 
-1645211754 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_limited_sorted_array_list.h
+1650811120 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_limited_sorted_array_list.h
 	"priority_queue_sorted_array_list.h"
 	<stdexcept>
 
-1649087194 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_sorted_array_list.h
+1650799190 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_sorted_array_list.h
 	"priority_queue_list.h"
 	"../list/array_list.h"
 	<stdexcept>
@@ -229,7 +229,7 @@
 	"priority_queue_list.h"
 	"../list/linked_list.h"
 
-1645211754 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_two_lists.h
+1650815138 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_two_lists.h
 	"priority_queue.h"
 	"priority_queue_limited_sorted_array_list.h"
 	"../list/linked_list.h"
@@ -238,7 +238,7 @@
 1649087389 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_unsorted_array_list.h
 	"priority_queue_list.h"
 
-1645211754 source:/home/roman/CodeBlocks_projects/AUS/tests/queue/queue_test.cpp
+1650806735 source:/home/roman/CodeBlocks_projects/AUS/tests/queue/queue_test.cpp
 	"queue_test.h"
 	"../../structures/queue/implicit_queue.h"
 	"../../structures/queue/explicit_queue.h"
@@ -356,13 +356,13 @@
 	<random>
 	<climits>
 
-1649879704 source:/home/roman/CodeBlocks_projects/AUS/structures/list/double_linked_list.h
+1650799786 source:/home/roman/CodeBlocks_projects/AUS/structures/list/double_linked_list.h
 	"list.h"
 	"../structure_iterator.h"
 	"../data_item.h"
 	"../utils.h"
 
-1649879704 /home/roman/CodeBlocks_projects/AUS/structures/list/double_linked_list.h
+1650799786 /home/roman/CodeBlocks_projects/AUS/structures/list/double_linked_list.h
 	"list.h"
 	"../structure_iterator.h"
 	"../data_item.h"

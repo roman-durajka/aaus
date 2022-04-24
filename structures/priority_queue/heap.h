@@ -104,11 +104,11 @@ namespace structures
 
 		PriorityQueueList<T>::list_->at(0) = PriorityQueueList<T>::list_->at(static_cast<int>(PriorityQueueList<T>::list_->size()) - 1);
 
-		PriorityQueueList<T>::list_->removeAt(static_cast<int>(PriorityQueueList<T>::list_->size()));
+		PriorityQueueList<T>::list_->removeAt(static_cast<int>(PriorityQueueList<T>::list_->size()) - 1);
 
 		int currentIndex = 0;
 		int sonIndex = getGreaterSonIndex(currentIndex);
-		while (sonIndex < static_cast<int>(PriorityQueueList<T>::list_->size()) && PriorityQueueList<T>::
+		while (sonIndex > -1 && sonIndex < static_cast<int>(PriorityQueueList<T>::list_->size()) && PriorityQueueList<T>::
 			list_->at(currentIndex)->getPriority() > PriorityQueueList<T>::list_->
 			at(sonIndex)->getPriority())
 		{

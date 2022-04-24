@@ -31,8 +31,7 @@ int main()
 	// TODO 05: Queue
 	//keeper.registerTest(new tests::QueueTestOverall());
 
-	// TODO 06: PriorityQueue
-	//keeper.registerTest(new tests::PriorityQueueTestOverall());
+	keeper.registerTest(new tests::PriorityQueueTestOverall());
 
 	// TODO 07: Tree
 	//keeper.registerTest(new tests::TreeTestOverall());

@@ -150,4 +150,104 @@ namespace tests
     public:
         PriorityQueueTestOverall();
     };
+
+    //heap tests
+
+    class HeapTestCopyConstructor
+        : public SimpleTest
+    {
+        public:
+            HeapTestCopyConstructor();
+            void test() override;
+    };
+
+    class HeapTestAssign
+        : public SimpleTest
+    {
+        public:
+            HeapTestAssign();
+            void test() override;
+    };
+
+    class HeapTestPush
+        : public SimpleTest
+    {
+        public:
+            HeapTestPush();
+            void test() override;
+    };
+
+    class HeapTestPop
+        : public SimpleTest
+    {
+        public:
+            HeapTestPop();
+            void test() override;
+    };
+
+    //priority queue two lists tests
+
+    class PriorityQueueTwoListsTestCopyConstructor
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestCopyConstructor();
+            void test() override;
+    };
+
+    class PriorityQueueTwoListsTestAssign
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestAssign();
+            void test() override;
+    };
+
+    class PriorityQueueTwoListsTestSize
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestSize();
+            void test() override;
+    };
+
+    class PriorityQueueTwoListsTestClear
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestClear();
+            void test() override;
+    };
+
+    class PriorityQueueTwoListsTestPush
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestPush();
+            void test() override;
+    };
+
+    class PriorityQueueTwoListsTestPop
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestPop();
+            void test() override;
+    };
+
+    class PriorityQueueTwoListsTestPeek
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestPeek();
+            void test() override;
+    };
+
+    class PriorityQueueTwoListsTestPeekPriority
+        : public SimpleTest
+    {
+        public:
+            PriorityQueueTwoListsTestPeekPriority();
+            void test() override;
+    };
 }
