@@ -464,7 +464,7 @@ class PriorityQueueTwoListsTimeAnalysisPush
         private:
             std::string operation_ = "peek";
         public:
-            PriorityQueueTwoListsTimeAnalysisPop();
+            PriorityQueueTwoListsTimeAnalysisPeek();
             std::string getCurrentOperation() override { return operation_; }
     };
 }
