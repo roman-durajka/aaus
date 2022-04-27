@@ -430,4 +430,190 @@ namespace tests
 
         delete newQueue;
     }
+
+    //power test
+
+    PriorityQueuePowerTest::PriorityQueuePowerTest(std::string name) :
+        SimpleTest(std::move(name))
+    {
+    }
+
+    int PriorityQueuePowerTest::getRandomNumber(int low, int high) {
+        return rand() % (high - low) + low;
+    }
+
+    void PriorityQueuePowerTest::test() {
+        srand(time(NULL));
+        structures::PriorityQueue<int>* newPriorityQueue = createPriorityQueue();
+
+        Scenario* scenario;
+        char currentScenario = getCurrentScenario();
+        switch (currentScenario) {
+            case('A'):
+                scenario = new ScenarioA();
+                break;
+            case('B'):
+                scenario = new ScenarioB();
+                break;
+            case('C'):
+                scenario = new ScenarioC();
+                break;
+            default:
+                throw std::logic_error("Unknown error occured, what even happened?");
+        }
+
+        std::ofstream outputFile;
+        outputFile.open("analysis/power_analysis/" + getName() + "/" + currentScenario + ".csv");
+        outputFile << "operation;duration;index\n";
+
+        //main loop
+        int operationPush = 0;
+        int opreationPop = 0;
+        int operationPeek = 0;
+
+        for (int i = 0; i < iterationCount_; i++) {
+            switch(getRandomNumber(1, 5)) {
+                case 1: {
+                    if (operationInsertCount >= scenario->getInsertCount()) {
+                        i--;
+                        continue;
+                    }
+                    operationInsertCount++;
+
+                    int randomValue = getRandomNumber(0, SHRT_MAX);
+                    int randomIndex = getRandomNumber(0, newList->size());
+
+                    SimpleTest::startStopwatch();
+                    newList->insert(randomValue, randomIndex);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "insert;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
+                    break;
+                }
+                case 2: {
+                    if (operationRemoveAtCount >= scenario->getRemoveAtCount()) {
+                        i--;
+                        continue;
+                    }
+                    operationRemoveAtCount++;
+
+                    int randomIndex = getRandomNumber(0, newList->size());
+
+                    SimpleTest::startStopwatch();
+                    newList->removeAt(randomIndex);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "removeAt;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
+                    break;
+                }
+                case 3: {
+                    if (operationAtCount >= scenario->getAtCount()) {
+                        i--;
+                        continue;
+                    }
+                    operationAtCount++;
+
+                    int randomIndex = getRandomNumber(0, newList->size());
+
+                    SimpleTest::startStopwatch();
+                    newList->at(randomIndex);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "at;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
+                    break;
+                }
+                case 4: {
+                    if (operationGetIndexOfCount >= scenario->getIndexOfCount()) {
+                        i--;
+                        continue;
+                    }
+                    operationGetIndexOfCount++;
+
+                    int randomIndex = getRandomNumber(0, newList->size());
+                    int randomValue = newList->at(randomIndex);
+
+                    SimpleTest::startStopwatch();
+                    newList->getIndexOf(randomValue);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "getIndexOf;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+
+                    break;
+                }
+            }
+            outputFile << std::to_string(i + 1);
+            outputFile << "\n";
+        }
+        outputFile.close();
+
+        delete scenario;
+        delete newList;
+    }
+
+    HeapPowerTest::HeapPowerTest(std::string name) :
+        PriorityQueuePowerTest(std::move(name))
+    {
+    }
+
+    structures::PriorityQueue<int>* HeapPowerTest::createPriorityQueue() {
+        structures::Heap<int>* heap = new structures::Heap<int>();
+        for (int i = 0; i < iterationCount_; i++) {
+            heap->push(getRandomNumber(0, maxPriorityCount_), getRandomNumber(0, SHRT_MAX));
+        }
+        return heap;
+    }
+
+    PriorityQueueTwoListsPowerTest::PriorityQueueTwoListsPowerTest(std::string name) :
+        PriorityQueuePowerTest(std::move(name))
+    {
+    }
+
+    structures::PriorityQueue<int>* PriorityQueueTwoListsPowerTest::createPriorityQueue() {
+        structures::PriorityQueueTwoLists<int>* priorityQueueTwoLists = new structures::PriorityQueueTwoLists<int>();
+        for (int i = 0; i < iterationCount_; i++) {
+            priorityQueueTwoLists->push(getRandomNumber(0, maxPriorityCount_), getRandomNumber(0, SHRT_MAX));
+        }
+        return priorityQueueTwoLists;
+    }
+
+    HeapPowerTestScenarioA::HeapPowerTestScenarioA() :
+        HeapPowerTest("Heap power test scenario A")
+    {
+    }
+
+    HeapPowerTestScenarioB::HeapPowerTestScenarioB() :
+        HeapPowerTest("Heap power test scenario B")
+    {
+    }
+
+    HeapPowerTestScenarioC::HeapPowerTestScenarioC() :
+        HeapPowerTest("Heap power test scenario C")
+    {
+    }
+
+    PriorityQueueTwoListsPowerTestScenarioA::PriorityQueueTwoListsPowerTestScenarioA() :
+        PriorityQueueTwoListsPowerTest("PriorityQueueTwoLists power test scenario A")
+    {
+    }
+
+    PriorityQueueTwoListsPowerTestScenarioB::PriorityQueueTwoListsPowerTestScenarioB() :
+        PriorityQueueTwoListsPowerTest("PriorityQueueTwoLists power test scenario B")
+    {
+    }
+
+    PriorityQueueTwoListsPowerTestScenarioC::PriorityQueueTwoListsPowerTestScenarioC() :
+        PriorityQueueTwoListsPowerTest("PriorityQueueTwoLists power test scenario C")
+    {
+    }
 }

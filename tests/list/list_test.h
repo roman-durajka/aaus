@@ -265,13 +265,6 @@ namespace tests
 
 //power test
 
-
-
-    enum Operation
-    {
-      insert, removeAt, at,  getIndexOf
-    };
-
     class ListPowerTest
         : public SimpleTest
     {

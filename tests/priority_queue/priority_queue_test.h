@@ -250,4 +250,129 @@ namespace tests
             PriorityQueueTwoListsTestPeekPriority();
             void test() override;
     };
+
+    //power test
+
+    class PriorityQueuePowerTest
+        : public SimpleTest
+    {
+        public:
+            PriorityQueuePowerTest(std::string name);
+            virtual structures::PriorityQueue<int>* createPriorityQueue() = 0;
+            virtual char getCurrentScenario() = 0;
+            virtual std::string getName() = 0;
+            int getRandomNumber(int low, int high);
+            void test() override;
+        protected:
+            static const int iterationCount_ = 100000;
+            static const int maxPriorityCount_ = 100000;
+
+        class Scenario
+        {
+            private:
+                int pushCount_ = iterationCount_ / 100;
+                int popCount_ = iterationCount_ / 100;
+                int peekCount_ = iterationCount_ / 100;
+
+            public:
+                Scenario(int pushCount, int popCount, int peekCount)
+                {
+                    pushCount_ *= pushCount;
+                    popCount_ *= popCount;
+                    peekCount_ *= peekCount;
+                };
+
+                inline int getPushCount() { return pushCount_; }
+                inline int getPopCount() { return popCount_ ;}
+                inline int getPeekCount() { return peekCount_; }
+        };
+
+        class ScenarioA : public Scenario {
+            public:
+                ScenarioA() : Scenario(35, 35, 30) {};
+        };
+
+        class ScenarioB : public Scenario {
+            public:
+                ScenarioB() : Scenario(50, 30, 20) {};
+        };
+
+        class ScenarioC : public Scenario {
+            public:
+                ScenarioC() : Scenario(70, 25, 5) {};
+        };
+    };
+
+    class HeapPowerTest
+        : public PriorityQueuePowerTest
+    {
+        public:
+            HeapPowerTest(std::string name);
+            structures::PriorityQueue<int>* createPriorityQueue() override;
+            std::string getName() override { return "Heap"; }
+    };
+
+    class PriorityQueueTwoListsPowerTest
+        : public PriorityQueuePowerTest
+    {
+        public:
+            PriorityQueueTwoListsPowerTest(std::string name);
+            structures::PriorityQueue<int>* createPriorityQueue() override;
+            std::string getName() override { return "PriorityQueueTwoLists"; }
+    };
+
+    class HeapPowerTestScenarioA
+        : public HeapPowerTest {
+        private:
+            char scenario = 'A';
+        public:
+            HeapPowerTestScenarioA();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class HeapPowerTestScenarioB
+        : public HeapPowerTest {
+        private:
+            char scenario = 'B';
+        public:
+        HeapPowerTestScenarioB();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class HeapPowerTestScenarioC
+        : public HeapPowerTest {
+        private:
+            char scenario = 'C';
+        public:
+            HeapPowerTestScenarioC();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class PriorityQueueTwoListsPowerTestScenarioA
+        : public PriorityQueueTwoListsPowerTest {
+        private:
+            char scenario = 'A';
+        public:
+            PriorityQueueTwoListsPowerTestScenarioA();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class PriorityQueueTwoListsPowerTestScenarioB
+        : public PriorityQueueTwoListsPowerTest {
+        private:
+            char scenario = 'B';
+        public:
+            PriorityQueueTwoListsPowerTestScenarioB();
+            char getCurrentScenario() override { return scenario; }
+    };
+
+    class PriorityQueueTwoListsPowerTestScenarioC
+        : public PriorityQueueTwoListsPowerTest {
+        private:
+            char scenario = 'C';
+        public:
+            PriorityQueueTwoListsPowerTestScenarioC();
+            char getCurrentScenario() override { return scenario; }
+    };
+
 }

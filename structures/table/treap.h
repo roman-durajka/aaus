@@ -153,7 +153,7 @@ namespace structures
 	template<typename K, typename T>
 	inline bool Treap<K, T>::equals(Structure& other)
 	{
-		return Table<K, T>::equals(dynamic_cast<Treap<K, T>*>(&other));
+		return Table<K, T>::equalsTable(dynamic_cast<Treap<K, T>*>(&other));
 	}
 
 	template<typename K, typename T>
@@ -178,21 +178,21 @@ namespace structures
 	}
 
 	template<typename K, typename T>
-	inline int Treap<K, T>::extractPriority(typename BinarySearchTree<K, T>::BSTTreeNode * node)
+	inline int Treap<K, T>::extractPriority(typename BinarySearchTree<K, T>::BSTTreeNode* node)
 	{
 		//TODO 10: Treap
 		throw std::runtime_error("Treap<K, T>::extractPriority: Not implemented yet.");
 	}
 
 	template<typename K, typename T>
-	inline void Treap<K, T>::rotateLeftOverParent(typename BinarySearchTree<K, T>::BSTTreeNode * node)
+	inline void Treap<K, T>::rotateLeftOverParent(typename BinarySearchTree<K, T>::BSTTreeNode* node)
 	{
 		//TODO 10: Treap
 		throw std::runtime_error("Treap<K, T>::rotateLeftOverParent: Not implemented yet.");
 	}
 
 	template<typename K, typename T>
-	inline void Treap<K, T>::rotateRightOverParent(typename BinarySearchTree<K, T>::BSTTreeNode * node)
+	inline void Treap<K, T>::rotateRightOverParent(typename BinarySearchTree<K, T>::BSTTreeNode* node)
 	{
 		//TODO 10: Treap
 		throw std::runtime_error("Treap<K, T>::rotateRightOverParent: Not implemented yet.");

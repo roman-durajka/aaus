@@ -21,6 +21,11 @@ namespace structures
 		/// <param name = "other"> NonortedSequenceTable, z ktorej sa prevezmu vlastnosti. </param>
 		UnsortedSequenceTable(UnsortedSequenceTable<K, T>& other);
 
+		/// <summary> Priradenie struktury. </summary>
+		/// <param name = "other"> Struktura, z ktorej ma prebrat vlastnosti. </param>
+		/// <returns> Adresa, na ktorej sa struktura nachadza. </returns>
+		Structure& assign(Structure& other) override;
+
 		/// <summary> Porovnanie struktur. </summary>
 		/// <param name="other">Struktura, s ktorou sa ma tato struktura porovnat. </param>
 		/// <returns>True ak su struktury zhodne typom aj obsahom. </returns>
@@ -29,7 +34,7 @@ namespace structures
 		/// <summary> Vrati prvok tabulky na danom indexe. </summary>
 		/// <param name = "index"> Index prvku. </param>
 		/// <returns> Prvok tabulky na danom indexe. </returns>
-		/// <exception cref="std::out_of_range"> Vyhodena, ak index nepatri do presahuje rozsah sekvencnej tabulky. </exception> 
+		/// <exception cref="std::out_of_range"> Vyhodena, ak index nepatri do presahuje rozsah sekvencnej tabulky. </exception>
 		TableItem<K, T>& getItemAtIndex(int index);
 
 		/// <summary> Vymeni prvky na indexoch. </summary>
@@ -52,16 +57,21 @@ namespace structures
 	}
 
 	template<typename K, typename T>
+	inline Structure& UnsortedSequenceTable<K, T>::assign(Structure& other)
+	{
+		return SequenceTable<K, T>::assignSequenceTable(dynamic_cast<UnsortedSequenceTable<K, T>&>(other));
+	}
+
+	template<typename K, typename T>
 	inline bool UnsortedSequenceTable<K, T>::equals(Structure& other)
 	{
-		return Table<K, T>::equals(dynamic_cast<UnsortedSequenceTable<K, T>*>(&other));
+		return Table<K, T>::equalsTable(dynamic_cast<UnsortedSequenceTable<K, T>*>(&other));
 	}
 
 	template<typename K, typename T>
 	inline TableItem<K, T>& UnsortedSequenceTable<K, T>::getItemAtIndex(int index)
 	{
-		//TODO 08: UnsortedSequenceTable
-		throw std::runtime_error("UnsortedSequenceTable<K, T>::getItemAtIndex: Not implemented yet.");
+        return *SequenceTable<K, T>::list_->at(index);
 	}
 
 	template<typename K, typename T>
