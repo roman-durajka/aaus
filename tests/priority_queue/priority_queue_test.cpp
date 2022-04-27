@@ -5,6 +5,8 @@
 #include "../../structures/priority_queue/priority_queue_sorted_array_list.h"
 #include "../../structures/priority_queue/priority_queue_two_lists.h"
 #include "../../structures/priority_queue/priority_queue_unsorted_array_list.h"
+#include <fstream>
+#include <iostream>
 
 namespace tests
 {
@@ -93,6 +95,12 @@ namespace tests
         addTest(new PriorityQueueTwoListsTestPop());
         addTest(new PriorityQueueTwoListsTestPeek());
         addTest(new PriorityQueueTwoListsTestPeekPriority());
+
+        //power test
+
+        addTest(new PriorityQueueTwoListsPowerTestScenarioA());
+        addTest(new PriorityQueueTwoListsPowerTestScenarioB());
+        addTest(new PriorityQueueTwoListsPowerTestScenarioC());
     }
 
     HeapTestOverall::HeapTestOverall() :
@@ -104,6 +112,12 @@ namespace tests
         addTest(new HeapTestAssign());
         addTest(new HeapTestPush());
         addTest(new HeapTestPop());
+
+        //power test
+
+        addTest(new HeapPowerTestScenarioA());
+        addTest(new HeapPowerTestScenarioB());
+        addTest(new HeapPowerTestScenarioC());
     }
 
     PriorityQueueTestOverall::PriorityQueueTestOverall() :
@@ -467,85 +481,61 @@ namespace tests
         outputFile << "operation;duration;index\n";
 
         //main loop
-        int operationPush = 0;
-        int opreationPop = 0;
-        int operationPeek = 0;
+        int operationPushCount = 0;
+        int opreationPopCount = 0;
+        int operationPeekCount = 0;
 
         for (int i = 0; i < iterationCount_; i++) {
-            switch(getRandomNumber(1, 5)) {
+            switch(getRandomNumber(1, 4)) {
                 case 1: {
-                    if (operationInsertCount >= scenario->getInsertCount()) {
+                    if (operationPushCount >= scenario->getPushCount()) {
                         i--;
                         continue;
                     }
-                    operationInsertCount++;
+                    operationPushCount++;
 
                     int randomValue = getRandomNumber(0, SHRT_MAX);
-                    int randomIndex = getRandomNumber(0, newList->size());
+                    int randomPriority = getRandomNumber(0, maxPriorityCount_);
 
                     SimpleTest::startStopwatch();
-                    newList->insert(randomValue, randomIndex);
+                    newPriorityQueue->push(randomPriority, randomValue);
                     SimpleTest::stopStopwatch();
 
-                    outputFile << "insert;";
+                    outputFile << "push;";
                     outputFile << SimpleTest::getElapsedTime().count();
                     outputFile << ";";
 
                     break;
                 }
                 case 2: {
-                    if (operationRemoveAtCount >= scenario->getRemoveAtCount()) {
+                    if (opreationPopCount >= scenario->getPopCount()) {
                         i--;
                         continue;
                     }
-                    operationRemoveAtCount++;
-
-                    int randomIndex = getRandomNumber(0, newList->size());
+                    opreationPopCount++;
 
                     SimpleTest::startStopwatch();
-                    newList->removeAt(randomIndex);
+                    newPriorityQueue->pop();
                     SimpleTest::stopStopwatch();
 
-                    outputFile << "removeAt;";
+                    outputFile << "pop;";
                     outputFile << SimpleTest::getElapsedTime().count();
                     outputFile << ";";
 
                     break;
                 }
                 case 3: {
-                    if (operationAtCount >= scenario->getAtCount()) {
+                    if (operationPeekCount >= scenario->getPeekCount()) {
                         i--;
                         continue;
                     }
-                    operationAtCount++;
-
-                    int randomIndex = getRandomNumber(0, newList->size());
+                    operationPeekCount++;
 
                     SimpleTest::startStopwatch();
-                    newList->at(randomIndex);
+                    newPriorityQueue->peek();
                     SimpleTest::stopStopwatch();
 
-                    outputFile << "at;";
-                    outputFile << SimpleTest::getElapsedTime().count();
-                    outputFile << ";";
-
-                    break;
-                }
-                case 4: {
-                    if (operationGetIndexOfCount >= scenario->getIndexOfCount()) {
-                        i--;
-                        continue;
-                    }
-                    operationGetIndexOfCount++;
-
-                    int randomIndex = getRandomNumber(0, newList->size());
-                    int randomValue = newList->at(randomIndex);
-
-                    SimpleTest::startStopwatch();
-                    newList->getIndexOf(randomValue);
-                    SimpleTest::stopStopwatch();
-
-                    outputFile << "getIndexOf;";
+                    outputFile << "peek;";
                     outputFile << SimpleTest::getElapsedTime().count();
                     outputFile << ";";
 
@@ -558,7 +548,7 @@ namespace tests
         outputFile.close();
 
         delete scenario;
-        delete newList;
+        delete newPriorityQueue;
     }
 
     HeapPowerTest::HeapPowerTest(std::string name) :
@@ -614,6 +604,132 @@ namespace tests
 
     PriorityQueueTwoListsPowerTestScenarioC::PriorityQueueTwoListsPowerTestScenarioC() :
         PriorityQueueTwoListsPowerTest("PriorityQueueTwoLists power test scenario C")
+    {
+    }
+
+    //time analysis
+
+    TimeAnalysis::TimeAnalysis(std::string name) :
+        SimpleTest(std::move(name))
+    {
+    }
+
+    int TimeAnalysis::getRandomNumber(int low, int high) {
+        return rand() % (high - low) + low;
+    }
+
+    void TimeAnalysis::test() {
+        srand(time(NULL));
+        std::string currentOperation = getCurrentOperation();
+
+        std::ofstream outputFile;
+        outputFile.open("analysis/time_analysis/" + getName() + "/" + currentOperation + ".csv");
+        outputFile << "operation;duration;index\n";
+
+        int randomIndex;
+
+        //main loop
+        for (int i = 10; i < iterationCount_; i += 100) {
+            structures::List<int>* newList = createList(i);
+
+            for (int y = 0; y < repeatCount_; y++) {
+                randomIndex = getRandomNumber(0, newList->size());
+
+                if (currentOperation == "insert") {
+                    SimpleTest::startStopwatch();
+                    newList->insert(0, randomIndex);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "insert;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+                }
+                else if (currentOperation == "removeAt") {
+                    SimpleTest::startStopwatch();
+                    newList->removeAt(randomIndex);
+                    SimpleTest::stopStopwatch();
+                    newList->add(0);
+
+                    outputFile << "removeAt;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+                }
+                else if (currentOperation == "at") {
+                    SimpleTest::startStopwatch();
+                    newList->at(randomIndex);
+                    SimpleTest::stopStopwatch();
+
+                    outputFile << "at;";
+                    outputFile << SimpleTest::getElapsedTime().count();
+                    outputFile << ";";
+                }
+                outputFile << std::to_string(i + 1);
+                outputFile << "\n";
+            }
+            delete newList;
+        }
+        outputFile.close();
+    }
+
+    //heap time analysis
+
+    HeapTimeAnalysis::HeapTimeAnalysis(std::string name) :
+        TimeAnalysis(std::move(name))
+    {
+    }
+
+    structures::PriorityQueue<int>* HeapTimeAnalysis::createPriorityQueue(int size) {
+        structures::Heap<int>* heap = new structures::Heap<int>();
+        for (int i = 0; i < size; i++) {
+            heap->push(getRandomNumber(0, maxPriorityCount_), getRandomNumber(0, SHRT_MAX));
+        }
+        return heap;
+    }
+
+    HeapTimeAnalysis::HeapTimeAnalysis(std::string name) :
+        TimeAnalysis(std::move(name))
+    {
+    }
+
+    //priority queue two lists time analysis
+
+    structures::List<int>* DoubleLinkedListTimeAnalysis::createList(int size) {
+        structures::PriorityQueueTwoLists<int>* priorityQueue = new structures::PriorityQueueTwoLists<int>();
+        for (int i = 0; i < size; i++) {
+            priorityQueue->push(getRandomNumber(0, maxPriorityCount_), getRandomNumber(0, SHRT_MAX));
+        }
+        return priorityQueue;
+    }
+
+//operations
+
+    HeapTimeAnalysisPush::HeapTimeAnalysisPush() :
+            HeapTimeAnalysis("Heap time analysis push")
+    {
+    }
+
+    HeapTimeAnalysisPop::HeapTimeAnalysisPop() :
+            HeapTimeAnalysis("Heap time analysis pop")
+    {
+    }
+
+    HeapTimeAnalysisPeek::HeapTimeAnalysisPeek() :
+            HeapTimeAnalysis("Heap time analysis peek")
+    {
+    }
+
+    PriorityQueueTwoListsTimeAnalysisPush::PriorityQueueTwoListsTimeAnalysisPush() :
+            PriorityQueueTwoListsTimeAnalysis("PriorityQueueTwoLists time analysis push")
+    {
+    }
+
+    PriorityQueueTwoListsTimeAnalysisPop::PriorityQueueTwoListsTimeAnalysisPop() :
+            PriorityQueueTwoListsTimeAnalysis("PriorityQueueTwoLists time analysis pop")
+    {
+    }
+
+    PriorityQueueTwoListsTimeAnalysisPeek::PriorityQueueTwoListsTimeAnalysisPeek() :
+            PriorityQueueTwoListsTimeAnalysis("PriorityQueueTwoLists time analysis peek")
     {
     }
 }

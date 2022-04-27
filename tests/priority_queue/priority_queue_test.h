@@ -375,4 +375,98 @@ namespace tests
             char getCurrentScenario() override { return scenario; }
     };
 
+    //time analysis
+
+    class TimeAnalysis
+        : public SimpleTest {
+        public:
+            TimeAnalysis(std::string name);
+            virtual structures::PriorityQueue<int>* createPriorityQueue(int size) = 0;
+            virtual std::string getCurrentOperation() = 0;
+            virtual std::string getName() = 0;
+            int getRandomNumber(int low, int high);
+            void test() override;
+        protected:
+            static const int iterationCount_ = 10000;
+            static const int repeatCount_ = 100;
+            static const int maxPriorityCount_ = 100000;
+    };
+
+    class HeapTimeAnalysis
+        : public TimeAnalysis
+    {
+        public:
+            HeapTimeAnalysis(std::string name);
+            structures::PriorityQueue<int>* createPriorityQueue(int size) override;
+            std::string getName() override { return "Heap"; }
+    };
+
+    class PriorityQueueTwoListsTimeAnalysis
+        : public TimeAnalysis
+    {
+        public:
+            PriorityQueueTwoListsTimeAnalysis(std::string name);
+            structures::PriorityQueue<int>* createPriorityQueue(int size) override;
+            std::string getName() override { return "PriorityQueueTwoLists"; }
+    };
+
+    //heap operations
+
+    class HeapTimeAnalysisPush
+        : public HeapTimeAnalysis {
+        private:
+            std::string operation_ = "push";
+        public:
+            HeapTimeAnalysisPush();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class HeapTimeAnalysisPop
+        : public HeapTimeAnalysis {
+        private:
+            std::string operation_ = "pop";
+        public:
+            HeapTimeAnalysisPop();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class HeapTimeAnalysisPeek
+        : public HeapTimeAnalysis {
+        private:
+            std::string operation_ = "peek";
+        public:
+            HeapTimeAnalysisPeek();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+//priority queue two lists operations
+
+class PriorityQueueTwoListsTimeAnalysisPush
+        : public PriorityQueueTwoListsTimeAnalysis {
+        private:
+            std::string operation_ = "push";
+        public:
+            PriorityQueueTwoListsTimeAnalysisPush();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class PriorityQueueTwoListsTimeAnalysisPop
+        : public PriorityQueueTwoListsTimeAnalysis {
+        private:
+            std::string operation_ = "pop";
+        public:
+            PriorityQueueTwoListsTimeAnalysisPop();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+
+    class PriorityQueueTwoListsTimeAnalysisPeek
+        : public PriorityQueueTwoListsTimeAnalysis {
+        private:
+            std::string operation_ = "peek";
+        public:
+            PriorityQueueTwoListsTimeAnalysisPop();
+            std::string getCurrentOperation() override { return operation_; }
+    };
+}
+
 }
