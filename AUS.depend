@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1650806806 source:/home/roman/CodeBlocks_projects/AUS/main.cpp
+1652358377 source:/home/roman/CodeBlocks_projects/AUS/main.cpp
 	"tests/vector/vector_test.h"
 	"tests/array/array_test.h"
 	"tests/matrix/matrix_test.h"
@@ -105,7 +105,7 @@
 1645211754 /home/roman/CodeBlocks_projects/AUS/structures/queue/queue.h
 	"../structure.h"
 
-1651048657 /home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.h
+1651576658 /home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.h
 	"../test.h"
 	"../../structures/priority_queue/priority_queue.h"
 	"../../structures/priority_queue/priority_queue_list.h"
@@ -121,11 +121,12 @@
 	<stdexcept>
 	<climits>
 
-1645211756 /home/roman/CodeBlocks_projects/AUS/tests/table/table_test.h
+1652385924 /home/roman/CodeBlocks_projects/AUS/tests/table/table_test.h
 	"../test.h"
 	"../../structures/table/table.h"
+	"../../structures/list/double_linked_list.h"
 
-1650911499 /home/roman/CodeBlocks_projects/AUS/structures/table/table.h
+1652343689 /home/roman/CodeBlocks_projects/AUS/structures/table/table.h
 	"../data_item.h"
 	"../structure.h"
 	"../structure_iterator.h"
@@ -134,7 +135,7 @@
 	"../test.h"
 	"../../structures/tree/tree.h"
 
-1649763240 /home/roman/CodeBlocks_projects/AUS/structures/tree/tree.h
+1652359905 /home/roman/CodeBlocks_projects/AUS/structures/tree/tree.h
 	"../structure.h"
 	"../structure_iterator.h"
 	"../data_item.h"
@@ -165,7 +166,7 @@
 	"../list/array_list.h"
 	"../utils.h"
 
-1650975686 /home/roman/CodeBlocks_projects/AUS/structures/table/sequence_table.h
+1652347441 /home/roman/CodeBlocks_projects/AUS/structures/table/sequence_table.h
 	"table.h"
 	"../list/list.h"
 	<stdexcept>
@@ -201,7 +202,7 @@
 	"../array/array.h"
 	<stdexcept>
 
-1650813022 source:/home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.cpp
+1651576719 source:/home/roman/CodeBlocks_projects/AUS/tests/priority_queue/priority_queue_test.cpp
 	"priority_queue_test.h"
 	"../../structures/priority_queue/heap.h"
 	"../../structures/priority_queue/priority_queue_limited_sorted_array_list.h"
@@ -209,8 +210,10 @@
 	"../../structures/priority_queue/priority_queue_sorted_array_list.h"
 	"../../structures/priority_queue/priority_queue_two_lists.h"
 	"../../structures/priority_queue/priority_queue_unsorted_array_list.h"
+	<fstream>
+	<iostream>
 
-1650959690 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/heap.h
+1651576762 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/heap.h
 	"priority_queue_list.h"
 	"../list/array_list.h"
 	"../utils.h"
@@ -229,7 +232,7 @@
 	"priority_queue_list.h"
 	"../list/linked_list.h"
 
-1650815138 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_two_lists.h
+1651576741 /home/roman/CodeBlocks_projects/AUS/structures/priority_queue/priority_queue_two_lists.h
 	"priority_queue.h"
 	"priority_queue_limited_sorted_array_list.h"
 	"../list/linked_list.h"
@@ -306,21 +309,21 @@
 	"../../structures/tree/k_way_tree.h"
 	"../../structures/tree/multi_way_tree.h"
 
-1649767317 /home/roman/CodeBlocks_projects/AUS/structures/tree/binary_tree.h
+1652361597 /home/roman/CodeBlocks_projects/AUS/structures/tree/binary_tree.h
 	"k_way_tree.h"
 	"tree.h"
 	<queue>
 
-1649765441 /home/roman/CodeBlocks_projects/AUS/structures/tree/k_way_tree.h
+1652358642 /home/roman/CodeBlocks_projects/AUS/structures/tree/k_way_tree.h
 	"tree.h"
 	"../array/array.h"
 
-1649765551 /home/roman/CodeBlocks_projects/AUS/structures/tree/multi_way_tree.h
+1652359029 /home/roman/CodeBlocks_projects/AUS/structures/tree/multi_way_tree.h
 	"tree.h"
 	"../list/list.h"
 	"../list/array_list.h"
 
-1645211756 source:/home/roman/CodeBlocks_projects/AUS/tests/table/table_test.cpp
+1652386871 source:/home/roman/CodeBlocks_projects/AUS/tests/table/table_test.cpp
 	"table_test.h"
 	"../../structures/table/binary_search_tree.h"
 	"../../structures/table/hash_table.h"
@@ -329,8 +332,10 @@
 	"../../structures/table/table.h"
 	"../../structures/table/treap.h"
 	"../../structures/table/unsorted_sequence_table.h"
+	<iostream>
+	<fstream>
 
-1650911418 /home/roman/CodeBlocks_projects/AUS/structures/table/binary_search_tree.h
+1652364837 /home/roman/CodeBlocks_projects/AUS/structures/table/binary_search_tree.h
 	"table.h"
 	"../list/list.h"
 	"../tree/binary_tree.h"
@@ -347,7 +352,7 @@
 	"../list/linked_list.h"
 	"sequence_table.h"
 
-1650976835 /home/roman/CodeBlocks_projects/AUS/structures/table/sorted_sequence_table.h
+1652382385 /home/roman/CodeBlocks_projects/AUS/structures/table/sorted_sequence_table.h
 	"../list/array_list.h"
 	"sequence_table.h"
 

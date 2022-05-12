@@ -34,10 +34,10 @@ int main()
 	keeper.registerTest(new tests::PriorityQueueTestOverall());
 
 	// TODO 07: Tree
-	//keeper.registerTest(new tests::TreeTestOverall());
+	keeper.registerTest(new tests::TreeTestOverall());
 
 	// TODO 08: Table
-	//keeper.registerTest(new tests::TableTestOverall());
+	keeper.registerTest(new tests::TableTestOverall());
 
 	bool run = true;
 	do

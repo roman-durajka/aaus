@@ -89,10 +89,14 @@ namespace structures
 	Structure& PriorityQueueTwoLists<T>::assign(Structure& other)
 	{
 		PriorityQueueTwoLists<T>& otherQueue = dynamic_cast<PriorityQueueTwoLists<T>&>(other);
-		shortList_->assign(*(otherQueue.shortList_));
-		longList_->assign(*(otherQueue.longList_));
-
-        return *this;
+		if (this != &other) {
+			clear();
+			shortList_->assign(*otherQueue.shortList_);
+			for (auto item : *otherQueue.longList_) {
+				longList_->add(new PriorityQueueItem<T>(*item));
+			}
+		}
+		return *this;
 	}
 
 	template<typename T>
@@ -105,6 +109,9 @@ namespace structures
 	void PriorityQueueTwoLists<T>::clear()
 	{
 		shortList_->clear();
+		for (auto item : *longList_) {
+			delete item;
+		}
 		longList_->clear();
 	}
 
@@ -128,7 +135,7 @@ namespace structures
         T removedData = shortList_->pop();
         int defaultNewShortListSize = 4;
 
-        if (shortList_->size() == 0 and longList_->size() > 0) {
+        if (shortList_->size() == 0 && longList_->size() > 0) {
             int newSize = std::sqrt(longList_->size());
             if (newSize > defaultNewShortListSize) {
                 defaultNewShortListSize = newSize;
@@ -137,8 +144,10 @@ namespace structures
 
             LinkedList<PriorityQueueItem<T>*>* newLongList = new LinkedList<PriorityQueueItem<T>*>();
             while (longList_->size() != 0) {
-                PriorityQueueItem<T>* removedItem = longList_->removeAt(longList_->size() - 1);
+                PriorityQueueItem<T>* removedItem = longList_->removeAt(0);
                 PriorityQueueItem<T>* pushResult = shortList_->pushAndRemove(removedItem->getPriority(), removedItem->accessData());
+				delete removedItem;
+
                 if (pushResult != nullptr) {
                     newLongList->add(pushResult);
                 }

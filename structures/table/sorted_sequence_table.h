@@ -109,5 +109,29 @@ namespace structures
         //return index podla parnosti/neparnosti
         //kluc z bisekcie < kluc, tak return index + 1
         // inak return index
+        if (indexEnd == -1) {
+            found = false;
+            return 0;
+        }
+
+        int indexMiddle = (indexStart + indexEnd) / 2;
+
+        K keyMiddle = SequenceTable<K, T>::list_->at(indexMiddle)->getKey();
+
+        if (key == keyMiddle) {
+            found = true;
+            return indexMiddle;
+        } else {
+            if (indexStart == indexEnd) {
+                found = false;
+                return key < keyMiddle ? indexMiddle : indexMiddle + 1;
+            } else {
+                if (keyMiddle < key) {
+                    return indexOfKey(key, indexMiddle + 1, indexEnd, found);
+                } else {
+                    return indexOfKey(key, indexStart, indexMiddle, found);
+                }
+            }
+        }
 	}
 }

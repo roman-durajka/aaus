@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 
+
 namespace tests
 {
     PriorityQueueTestInterface::PriorityQueueTestInterface() :
@@ -101,6 +102,12 @@ namespace tests
         addTest(new PriorityQueueTwoListsPowerTestScenarioA());
         addTest(new PriorityQueueTwoListsPowerTestScenarioB());
         addTest(new PriorityQueueTwoListsPowerTestScenarioC());
+
+        //time analysis
+
+        addTest(new PriorityQueueTwoListsTimeAnalysisPush());
+        addTest(new PriorityQueueTwoListsTimeAnalysisPop());
+        addTest(new PriorityQueueTwoListsTimeAnalysisPeek());
     }
 
     HeapTestOverall::HeapTestOverall() :
@@ -118,6 +125,12 @@ namespace tests
         addTest(new HeapPowerTestScenarioA());
         addTest(new HeapPowerTestScenarioB());
         addTest(new HeapPowerTestScenarioC());
+
+        //time analysis
+
+        addTest(new HeapTimeAnalysisPush());
+        addTest(new HeapTimeAnalysisPop());
+        addTest(new HeapTimeAnalysisPeek());
     }
 
     PriorityQueueTestOverall::PriorityQueueTestOverall() :
@@ -253,6 +266,7 @@ namespace tests
         firstQueue->push(30, 30);
 
         structures::PriorityQueueTwoLists<int>* secondQueue = new structures::PriorityQueueTwoLists<int>(*firstQueue);
+        assertTrue(secondQueue->size() == 3);
 
         assertTrue(secondQueue->peekPriority() == 10);
         assertTrue(secondQueue->pop() == 10);
@@ -482,7 +496,7 @@ namespace tests
 
         //main loop
         int operationPushCount = 0;
-        int opreationPopCount = 0;
+        int operationPopCount = 0;
         int operationPeekCount = 0;
 
         for (int i = 0; i < iterationCount_; i++) {
@@ -508,11 +522,11 @@ namespace tests
                     break;
                 }
                 case 2: {
-                    if (opreationPopCount >= scenario->getPopCount()) {
+                    if (operationPopCount >= scenario->getPopCount()) {
                         i--;
                         continue;
                     }
-                    opreationPopCount++;
+                    operationPopCount++;
 
                     SimpleTest::startStopwatch();
                     newPriorityQueue->pop();
@@ -558,7 +572,7 @@ namespace tests
 
     structures::PriorityQueue<int>* HeapPowerTest::createPriorityQueue() {
         structures::Heap<int>* heap = new structures::Heap<int>();
-        for (int i = 0; i < iterationCount_; i++) {
+        for (int i = 0; i < 5000; i++) {
             heap->push(getRandomNumber(0, maxPriorityCount_), getRandomNumber(0, SHRT_MAX));
         }
         return heap;
@@ -571,7 +585,7 @@ namespace tests
 
     structures::PriorityQueue<int>* PriorityQueueTwoListsPowerTest::createPriorityQueue() {
         structures::PriorityQueueTwoLists<int>* priorityQueueTwoLists = new structures::PriorityQueueTwoLists<int>();
-        for (int i = 0; i < iterationCount_; i++) {
+        for (int i = 0; i < 5000; i++) {
             priorityQueueTwoLists->push(getRandomNumber(0, maxPriorityCount_), getRandomNumber(0, SHRT_MAX));
         }
         return priorityQueueTwoLists;
@@ -609,16 +623,16 @@ namespace tests
 
     //time analysis
 
-    TimeAnalysis::TimeAnalysis(std::string name) :
+    PriorityQueueTimeAnalysis::PriorityQueueTimeAnalysis(std::string name) :
         SimpleTest(std::move(name))
     {
     }
 
-    int TimeAnalysis::getRandomNumber(int low, int high) {
+    int PriorityQueueTimeAnalysis::getRandomNumber(int low, int high) {
         return rand() % (high - low) + low;
     }
 
-    void TimeAnalysis::test() {
+    void PriorityQueueTimeAnalysis::test() {
         srand(time(NULL));
         std::string currentOperation = getCurrentOperation();
 
@@ -626,47 +640,44 @@ namespace tests
         outputFile.open("analysis/time_analysis/" + getName() + "/" + currentOperation + ".csv");
         outputFile << "operation;duration;index\n";
 
-        int randomIndex;
-
         //main loop
         for (int i = 10; i < iterationCount_; i += 100) {
-            structures::List<int>* newList = createList(i);
+            structures::PriorityQueue<int>* newPriorityQueue = createPriorityQueue(i + 90);  //added 90 more values so that pop can be evaluated without error
 
             for (int y = 0; y < repeatCount_; y++) {
-                randomIndex = getRandomNumber(0, newList->size());
-
-                if (currentOperation == "insert") {
+                if (currentOperation == "push") {
+                    int randomValue = getRandomNumber(0, SHRT_MAX);
+                    int randomPriority = getRandomNumber(0, maxPriorityCount_);
                     SimpleTest::startStopwatch();
-                    newList->insert(0, randomIndex);
+                    newPriorityQueue->push(randomPriority, randomValue);
                     SimpleTest::stopStopwatch();
 
-                    outputFile << "insert;";
+                    outputFile << "push;";
                     outputFile << SimpleTest::getElapsedTime().count();
                     outputFile << ";";
                 }
-                else if (currentOperation == "removeAt") {
+                else if (currentOperation == "pop") {
                     SimpleTest::startStopwatch();
-                    newList->removeAt(randomIndex);
+                    newPriorityQueue->pop();
                     SimpleTest::stopStopwatch();
-                    newList->add(0);
 
-                    outputFile << "removeAt;";
+                    outputFile << "pop;";
                     outputFile << SimpleTest::getElapsedTime().count();
                     outputFile << ";";
                 }
-                else if (currentOperation == "at") {
+                else if (currentOperation == "peek") {
                     SimpleTest::startStopwatch();
-                    newList->at(randomIndex);
+                    newPriorityQueue->peek();
                     SimpleTest::stopStopwatch();
 
-                    outputFile << "at;";
+                    outputFile << "peek;";
                     outputFile << SimpleTest::getElapsedTime().count();
                     outputFile << ";";
                 }
                 outputFile << std::to_string(i + 1);
                 outputFile << "\n";
             }
-            delete newList;
+            delete newPriorityQueue;
         }
         outputFile.close();
     }
@@ -674,7 +685,7 @@ namespace tests
     //heap time analysis
 
     HeapTimeAnalysis::HeapTimeAnalysis(std::string name) :
-        TimeAnalysis(std::move(name))
+        PriorityQueueTimeAnalysis(std::move(name))
     {
     }
 
@@ -686,14 +697,14 @@ namespace tests
         return heap;
     }
 
-    HeapTimeAnalysis::HeapTimeAnalysis(std::string name) :
-        TimeAnalysis(std::move(name))
+    //priority queue two lists time analysis
+
+    PriorityQueueTwoListsTimeAnalysis::PriorityQueueTwoListsTimeAnalysis(std::string name) :
+        PriorityQueueTimeAnalysis(std::move(name))
     {
     }
 
-    //priority queue two lists time analysis
-
-    structures::List<int>* DoubleLinkedListTimeAnalysis::createList(int size) {
+    structures::PriorityQueue<int>* PriorityQueueTwoListsTimeAnalysis::createPriorityQueue(int size) {
         structures::PriorityQueueTwoLists<int>* priorityQueue = new structures::PriorityQueueTwoLists<int>();
         for (int i = 0; i < size; i++) {
             priorityQueue->push(getRandomNumber(0, maxPriorityCount_), getRandomNumber(0, SHRT_MAX));

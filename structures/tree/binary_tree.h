@@ -250,15 +250,14 @@ namespace structures
 	template<typename T>
 	inline void BinaryTree<T>::InOrderTreeIterator::populatePath(TreeNode<T>* current)
 	{
-        if (current != nullptr) {
-            BinaryTreeNode<T>* current = dynamic_cast<BinaryTreeNode<T>*>(current);
+        BinaryTreeNode<T>* currentNode = dynamic_cast<BinaryTreeNode<T>*>(current);
+        if (currentNode != nullptr) {
             //spracuj lavy
-            populatePath(current->getLeftSon());
-            Tree<T>::TreeIterator::path_->push(current);
+            populatePath(currentNode->getLeftSon());
+            Tree<T>::TreeIterator::path_->push(currentNode);
             //spracuj pravy
-            populatePath(current->getRightSon());
+            populatePath(currentNode->getRightSon());
         }
 	}
 
 }
-

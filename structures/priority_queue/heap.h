@@ -93,7 +93,6 @@ namespace structures
 			);
 			indexCurrent = parentIndex;
 			parentIndex = getParentIndex(indexCurrent);
-
 		}
 	}
 

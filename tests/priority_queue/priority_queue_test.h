@@ -377,10 +377,10 @@ namespace tests
 
     //time analysis
 
-    class TimeAnalysis
+    class PriorityQueueTimeAnalysis
         : public SimpleTest {
         public:
-            TimeAnalysis(std::string name);
+            PriorityQueueTimeAnalysis(std::string name);
             virtual structures::PriorityQueue<int>* createPriorityQueue(int size) = 0;
             virtual std::string getCurrentOperation() = 0;
             virtual std::string getName() = 0;
@@ -393,7 +393,7 @@ namespace tests
     };
 
     class HeapTimeAnalysis
-        : public TimeAnalysis
+        : public PriorityQueueTimeAnalysis
     {
         public:
             HeapTimeAnalysis(std::string name);
@@ -402,7 +402,7 @@ namespace tests
     };
 
     class PriorityQueueTwoListsTimeAnalysis
-        : public TimeAnalysis
+        : public PriorityQueueTimeAnalysis
     {
         public:
             PriorityQueueTwoListsTimeAnalysis(std::string name);
@@ -467,6 +467,4 @@ class PriorityQueueTwoListsTimeAnalysisPush
             PriorityQueueTwoListsTimeAnalysisPeek();
             std::string getCurrentOperation() override { return operation_; }
     };
-}
-
 }

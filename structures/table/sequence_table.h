@@ -206,8 +206,8 @@ namespace structures
         if (this != &other) {
             clear();
 
-            for (auto tableItem : *other.list_) {
-            //for (auto tableItem : other) {
+            //for (auto tableItem : *other.list_) {
+            for (auto tableItem : other) {
                 list_->add(new TableItem<K, T>(*tableItem));
             }
         }
