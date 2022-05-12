@@ -916,9 +916,8 @@ namespace tests
 
         //main loop
         for (int i = 10; i < iterationCount_; i += 100) {
-            structures::DoubleLinkedList<int>* keys = new structures::DoubleLinkedList<int>();
             int tableSize = i + 90;
-            structures::Table<int, int>* newTable = createTable(tableSize, *keys);  //added 90 more values so that pop can be evaluated without error
+            structures::Table<int, int>* newTable = createTable(tableSize);  //added 90 more values so that pop can be evaluated without error
 
             for (int y = 0; y < repeatCount_; y++) {
                 if (currentOperation == "insert") {
@@ -953,7 +952,6 @@ namespace tests
                 outputFile << "\n";
             }
             delete newTable;
-            delete keys;
         }
         outputFile.close();
     }
@@ -965,7 +963,7 @@ namespace tests
     {
     }
 
-    structures::Table<int, int>* SortedSequenceTableTimeAnalysis::createTable(int size, structures::DoubleLinkedList<int>& keys) {
+    structures::Table<int, int>* SortedSequenceTableTimeAnalysis::createTable(int size) {
         structures::SortedSequenceTable<int, int>* table = new structures::SortedSequenceTable<int, int>();
         for (int i = size; i < size * 2; i++) {
             table->insert(i, getRandomNumber(0, SHRT_MAX));
@@ -980,7 +978,7 @@ namespace tests
     {
     }
 
-    structures::Table<int, int>* BinarySearchTreeTimeAnalysis::createTable(int size, structures::DoubleLinkedList<int>& keys) {
+    structures::Table<int, int>* BinarySearchTreeTimeAnalysis::createTable(int size) {
         structures::BinarySearchTree<int, int>* table = new structures::BinarySearchTree<int, int>();
         for (int i = size; i < size * 2; i++) {
             table->insert(i, getRandomNumber(0, SHRT_MAX));
